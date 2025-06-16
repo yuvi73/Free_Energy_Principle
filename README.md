@@ -18,6 +18,8 @@ This project implements a simulation of the Free Energy Principle (FEP) using C+
 
 ## Building the Project
 
+### Local Build
+
 1. Install dependencies:
    ```bash
    # macOS
@@ -35,6 +37,28 @@ This project implements a simulation of the Free Energy Principle (FEP) using C+
 3. Run the simulation:
    ```bash
    ./fep_simulation
+   ```
+
+### Docker Build
+
+1. Build the Docker image:
+   ```bash
+   docker build -t fep-simulation .
+   ```
+
+2. Run the container:
+   ```bash
+   docker run -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix fep-simulation
+   ```
+
+Note: For Docker on macOS, you'll need to install and configure XQuartz to display the GUI:
+1. Install XQuartz: `brew install --cask xquartz`
+2. Start XQuartz and enable "Allow connections from network clients" in XQuartz preferences
+3. Restart your computer
+4. Run the container with:
+   ```bash
+   xhost +  # Allow X server connections
+   docker run -e DISPLAY=host.docker.internal:0 -v /tmp/.X11-unix:/tmp/.X11-unix fep-simulation
    ```
 
 ## Usage
